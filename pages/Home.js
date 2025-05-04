@@ -30,6 +30,18 @@ const Home = () => {
       });
   };
 
+  const deleteProduct = (productId) => {
+    axios
+      .delete(`${baseUrl}delete-product/${productId}`)
+      .then((res) => {
+        console.log(res.data);
+        setApiLoad(!apiLoad); // Trigger re-fetch of products
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   useEffect(() => {
     axios
       .get(`${baseUrl}get-products`)
@@ -113,6 +125,12 @@ const Home = () => {
                   <p className="card-text">
                     Description: {eachProduct?.description}
                   </p>
+                  <button
+                    className="btn btn-danger mt-2"
+                    onClick={() => deleteProduct(eachProduct.id)}
+                  >
+                    Delete
+                  </button>
                 </div>
               </div>
             </div>
