@@ -5,6 +5,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
 
+
 const Home = () => {
   const [productName, setProductName] = useState('');
   const [productPrice, setProductPrice] = useState('');
