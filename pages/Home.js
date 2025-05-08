@@ -26,7 +26,7 @@ const Home = () => {
     e.preventDefault();
     setLoading(true);
     axios
-      .post(`${baseUrl}add-product`, {
+      .post(`${baseUrl}product`, {
         name: productName,
         price: productPrice,
         description: productDescription,
@@ -66,7 +66,7 @@ const Home = () => {
   const deleteProduct = (productId) => {
     setLoading(true);
     axios
-      .delete(`${baseUrl}delete-product/${productId}`)
+      .delete(`${baseUrl}product/${productId}`)
       .then(() => {
         setApiLoad(!apiLoad);
         Swal.fire('Deleted!', 'Product has been deleted.', 'success');
@@ -92,7 +92,7 @@ const Home = () => {
     e.preventDefault();
     setLoading(true);
     axios
-      .put(`${baseUrl}edit-product/${editProductId}`, {
+      .put(`${baseUrl}product/${editProductId}`, {
         name: editProductName,
         price: editProductPrice,
         description: editProductDescription,
@@ -114,7 +114,7 @@ const Home = () => {
 
   useEffect(() => {
     axios
-      .get(`${baseUrl}get-products`)
+      .get(`${baseUrl}products`)
       .then((res) => {
         setAllProducts(res.data);
       })
@@ -125,7 +125,6 @@ const Home = () => {
 
   return (
     <div className="container py-5">
-      {/* ✅ Fullscreen Spinner */}
       {loading && (
         <div
           className="position-fixed top-0 start-0 w-100 h-100 bg-white bg-opacity-75 d-flex justify-content-center align-items-center"
@@ -135,7 +134,6 @@ const Home = () => {
         </div>
       )}
 
-      {/* Add Product Form */}
       <div className="card p-4 shadow-sm">
         <h2 className="text-center mb-4">Add New Product</h2>
         <form onSubmit={addProduct}>
@@ -178,7 +176,6 @@ const Home = () => {
         </form>
       </div>
 
-      {/* Product List */}
       <div className="mt-5">
         <h2 className="text-center mb-4">Product List</h2>
         <div className="row">
@@ -213,8 +210,7 @@ const Home = () => {
           ))}
         </div>
       </div>
-
-      {/* Edit Modal */}
+      
       <Modal show={showEditModal} onHide={() => setShowEditModal(false)}>
         <Modal.Header closeButton>
           <Modal.Title>Edit Product</Modal.Title>
